@@ -911,7 +911,7 @@ struct AllReduceTwoshot {
         long comm_data1_offset = num_blocks * LineCodec::kTileSize + comm_data0_offset;
 
         long comm_flags0_offset = block * (kWorldSize * sizeof(int));
-        long comm_flags1_offset = num_blocks * (kWorldSize * sizeof(int)) + comm_flags0_offset;
+        long comm_flags1_offset = (data_offset/2) + comm_flags0_offset;
 
         for (int r = 0; r < kWorldSize; r++) {
             int32x4_t* send_buffer = reinterpret_cast<int32x4_t*>(buffer_list[r] + comm_data0_offset + rank * LineCodec::kRankTileSize);
